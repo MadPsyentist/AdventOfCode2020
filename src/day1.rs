@@ -1,5 +1,10 @@
 use std::ops::Add;
 
+pub fn day(input: &str) {
+    part1(input);
+    part2(input);
+}
+
 pub fn part1(input: &str) {
     let numbers = process_input(input);
     for (pos, element) in numbers.iter().enumerate() {
@@ -15,7 +20,8 @@ pub fn part2(input: &str) {
     for (pos, element) in numbers.iter().enumerate() {
         for (pos2, element2) in (&numbers[pos+1..]).iter().enumerate() {
             match find_right_side_pair(element + element2, &numbers[pos+pos2+1..], 2020) {
-                Some(num) => println!("found {} and {} and {} add to 2020, multiplied = {}", element, element2, num, element * element2 * num),
+                Some(num) => println!("found {} and {} and {} add to 2020, multiplied = {}", 
+                    element, element2, num, element * element2 * num),
                 None => (),
             }
         }
