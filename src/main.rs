@@ -2,6 +2,7 @@ use std::env;
 use std::fs;
 
 mod day1;
+mod day2;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -9,6 +10,7 @@ fn main() {
     if args.len() > 1 {
         match args[1].to_lowercase().as_str() {
             "day1" => day1::day(&input),
+            "day2" => day2::day(&input),
             _ => print_help(),
         }
     } else {

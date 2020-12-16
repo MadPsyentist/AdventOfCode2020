@@ -1,5 +1,3 @@
-use std::ops::Add;
-
 pub fn day(input: &str) {
     part1(input);
     part2(input);
