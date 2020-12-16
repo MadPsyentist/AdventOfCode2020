@@ -4,7 +4,14 @@ pub fn day(input: &str) {
 }
 
 pub fn part1(input: &str) {
-    let trees: u32 = input.lines().enumerate().filter(|pos, line| line.chars().nth((3*pos)%31).unwrap().eq('#')).count();
+    let trees: u32 = input.lines()
+        .enumerate()
+        .filter(|(pos, line)| 
+            line.chars()
+            .nth((3*pos)%31)
+            .unwrap()
+            .eq(&'#'))
+        .count() as u32;
     println!("part 1: you encounterd {} trees", trees);
 }
 
