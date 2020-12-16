@@ -4,19 +4,14 @@ pub fn day(input: &str) {
 }
 
 pub fn part1(input: &str) {
-    for (pos, ele) in input.lines().enumerate() {
-        let pap = PasswordAndPolicyFromLine(ele);
-        println!("{}: {}, min:{} max:{} char:{} pass:{}", pos, ele, pap.Min_Character_Count, pap.Max_Character_Count, pap.Character, pap.Password);
-    }
-    println!("{} passwords meet their policy", 
+    println!("Part 1: {} passwords meet their policy", 
         input.lines().filter(|i| PasswordMeetsPolicy(PasswordAndPolicyFromLine(i))).count());
 }
 
 pub fn part2(input: &str) {
-    println!("{} passwords meet their policy", 
+    println!("part 2: {} passwords meet their policy", 
         input.lines().map(|l| PasswordAndPolicyFromLine(l))
-            .filter(|pap| CheckCharacterInPosition(pap.Character, pap.Min_Character_Count, &pap.Password)
-                || CheckCharacterInPosition(pap.Character, pap.Max_Character_Count, &pap.Password)).count());
+            .filter(|pap| PasswordMeetsPolicy_Part2(pap)).count());
 }
 
 struct PasswordAndPolicy {
@@ -65,4 +60,12 @@ fn PasswordMeetsPolicy(passAndpPol: PasswordAndPolicy) -> bool {
 
 fn CheckCharacterInPosition(character: char, position: u32, password: &str) -> bool {
     password.chars().nth((position-1) as usize).unwrap_or('$').eq(&character)
+}
+
+fn PasswordMeetsPolicy_Part2(PassPol: &PasswordAndPolicy) -> bool {
+    (CheckCharacterInPosition(PassPol.Character, PassPol.Min_Character_Count, &PassPol.Password)
+    || CheckCharacterInPosition(PassPol.Character, PassPol.Max_Character_Count, &PassPol.Password))
+    &&
+    !(CheckCharacterInPosition(PassPol.Character, PassPol.Min_Character_Count, &PassPol.Password)
+    && CheckCharacterInPosition(PassPol.Character, PassPol.Max_Character_Count, &PassPol.Password))
 }
