@@ -11,6 +11,7 @@ fn main() {
         match args[1].to_lowercase().as_str() {
             "day1" => day1::day(&input),
             "day2" => day2::day(&input),
+            "day3" => day3::day(&input),
             _ => print_help(),
         }
     } else {
